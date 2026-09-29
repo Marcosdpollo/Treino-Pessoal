@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Projeto Lutador</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&display=swap">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);--bg:#0e1116;--pn:#171b23;--p2:#212733;--tx:#eef0f3;--mu:#8d96a5;--ac:#f2b134;--ac2:#1b1405;--rd:#e5484d;--gn:#3ecf8e;--ln:#2a313d}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f3f4f6;--pn:#fff;--p2:#e8eaee;--tx:#14171c;--mu:#59616f;--ac:#b8760a;--ac2:#fff;--ln:#d5d9e0}}
+:root[data-theme="dark"]{--bg:#09090b;--pn:#151518;--p2:#212126;--tx:#ece9e2;--mu:#93939c;--ac:#e5322d;--ac2:#fff;--ln:#2d2d33}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+#app{max-width:640px;margin:0 auto;padding:14px 14px 110px}
+h1,h2,h3{font-family:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;margin:0;letter-spacing:.3px}
+h1{font-size:30px}h2{font-size:24px;margin:18px 0 8px}h3{font-size:19px}
+p{margin:6px 0}small,.mu{color:var(--mu);font-size:13px}
+.cd{background:var(--pn);border:1px solid var(--ln);border-radius:12px;padding:12px 14px;margin:10px 0}
+.hero{border-left:4px solid var(--ac)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.g2 .cd{margin:0}.g2 b{display:block}
+.br{height:7px;background:var(--p2);border-radius:5px;overflow:hidden;margin-top:6px}.br i{display:block;height:100%;background:var(--ac)}
+button{font:inherit;color:var(--tx);background:var(--p2);border:1px solid var(--ln);border-radius:10px;padding:10px 14px;cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.big{display:block;width:100%;padding:16px;font-size:17px;font-weight:700;margin:8px 0}
+.pri{background:var(--ac);color:var(--ac2);border-color:var(--ac)}
+.ch{display:flex;gap:8px;margin:10px 0;align-items:center;overflow-x:auto}.ch button{white-space:nowrap;padding:8px 12px}.ch .on{background:var(--ac);color:var(--ac2);border-color:var(--ac)}.ch b{flex:1;text-align:center}
+.bd{display:inline-block;background:var(--p2);border-radius:20px;padding:3px 10px;font-size:13px;margin:0 6px 6px 0}
+.al{background:#3b2a0a;border:1px solid var(--ac);color:#ffd98a;border-radius:10px;padding:10px 12px;margin:10px 0;font-size:14px}
+.dg{background:#3a1416;border-color:var(--rd);color:#ffb4b6}
+:root:not([data-theme="dark"]) .al{}
+.bl{background:var(--pn);border:1px solid var(--ln);border-radius:12px;margin:8px 0;padding:0 14px}
+.bl summary{display:flex;justify-content:space-between;gap:8px;padding:13px 0;cursor:pointer}.bl summary span{color:var(--mu);white-space:nowrap}
+.it{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--ln)}.it>div{flex:1}.it b{display:block}.it small{display:block}
+.ic{padding:6px 10px}
+.rw{display:flex;gap:12px;align-items:center;background:var(--pn);border:1px solid var(--ln);border-radius:12px;padding:10px 12px;margin:6px 0;cursor:pointer}
+.rw.td{border-color:var(--ac)}.rw>div:nth-child(2){flex:1;min-width:0}.rw b{display:block}
+.dt{width:42px;text-align:center}.dt b{font:700 24px "Barlow Condensed",sans-serif}
+.cl{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sp{display:flex;gap:3px;align-items:flex-end;height:46px;margin-top:8px}.sp i{flex:1;background:var(--ac);border-radius:2px;min-height:4px}
+.big2{font:700 34px "Barlow Condensed",sans-serif;color:var(--ac)}
+label{display:block;margin:12px 0 4px;font-size:14px}
+input[type=number],input[type=date],input[type=text],select,textarea{width:100%;font:inherit;color:var(--tx);background:var(--p2);border:1px solid var(--ln);border-radius:8px;padding:9px}
+input[type=range]{width:100%;accent-color:var(--ac)}.rg output{float:right;color:var(--ac);font-weight:700}
+input[type=checkbox]{width:22px;height:22px;accent-color:var(--ac)}
+table{width:100%;border-collapse:collapse;font-size:14px}td{padding:6px 0;border-top:1px solid var(--ln)}td:last-child{text-align:right}
+.md{position:fixed;inset:0;background:#000a;z-index:20;display:flex;align-items:flex-end;justify-content:center}
+.md>div{background:var(--pn);width:100%;max-width:640px;max-height:88%;overflow:auto;border-radius:16px 16px 0 0;padding:16px 16px calc(24px + env(safe-area-inset-bottom,0px))}
+.md h4{margin:14px 0 2px;color:var(--ac);font-size:14px}.md p{margin:0}
+.toast{background:var(--ac);color:var(--ac2);border-radius:10px;padding:10px 12px;margin:8px 0;font-weight:600}
+#nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--pn);border-top:1px solid var(--ln);padding-bottom:env(safe-area-inset-bottom,0px);z-index:10}
+#nav button{flex:1;border:0;border-radius:0;background:none;font-size:10.5px;padding:8px 0;color:var(--mu)}#nav span{display:block;font-size:19px}#nav .on{color:var(--ac)}
+
+body{background:radial-gradient(120% 45% at 50% 0,#320b0d 0,var(--bg) 62%) no-repeat,var(--bg)}
+h1,h2,h3{font-weight:800;font-style:italic;text-transform:uppercase;letter-spacing:.6px}
+h1{font-size:48px;line-height:.92}
+h2{font-size:26px;border-left:5px solid var(--ac);padding-left:10px}
+.cd,.bl,.rw{border:0;border-radius:0;background:linear-gradient(135deg,var(--pn),#0e0e11);box-shadow:inset 3px 0 0 #3a3a42;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))}
+.hero,.rw.td{box-shadow:inset 5px 0 0 var(--ac)}
+.g2 .cd{padding-left:16px}
+button{border:0;border-radius:0;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);font-weight:700;letter-spacing:.4px;padding:10px 18px}
+button:focus-visible{outline-offset:-4px}
+.big{font:italic 800 22px "Barlow Condensed","Arial Narrow",sans-serif;letter-spacing:1.2px;text-transform:uppercase;padding:15px}
+.pri{background:linear-gradient(180deg,#ff4a3f,#b3151a);color:#fff}
+.ch .on{background:var(--ac);color:#fff}
+.bd{border-radius:0;background:#2a2a30;transform:skewX(-12deg);padding:3px 12px}
+.al{background:#2a0d0e;border:0;box-shadow:inset 4px 0 0 var(--ac);border-radius:0;color:#ffd6d2}
+.br{height:9px;background:#2a2a30;border-radius:0;transform:skewX(-25deg)}.br i{background:linear-gradient(90deg,#8e1013,#ff3b30)}
+.big2{color:var(--tx);font-size:42px;font-style:italic}
+#nav{background:#0c0c0f;border-top:2px solid var(--ac)}#nav button{clip-path:none;font-weight:600}#nav .on{color:#fff;box-shadow:inset 0 3px 0 var(--ac)}
+.toast{border-radius:0;background:var(--ac);color:#fff}
+.ban{position:relative;overflow:hidden;padding:22px 18px 20px;margin:0 0 14px;background:repeating-linear-gradient(45deg,#ffffff09 0 1px,transparent 1px 14px),repeating-linear-gradient(-45deg,#ffffff09 0 1px,transparent 1px 14px),linear-gradient(120deg,#3f0c0f,#0e0e11 75%);clip-path:polygon(0 0,100% 0,100% calc(100% - 22px),calc(100% - 22px) 100%,0 100%)}
+.ban::after{content:"";position:absolute;left:0;bottom:0;height:5px;width:62%;background:var(--ac)}
+.ban .oct{position:absolute;right:-46px;top:-36px;width:220px;color:var(--ac);opacity:.4}
+.ban>*{position:relative}.ban .oct{position:absolute}
+.ban .cnt{display:inline-block;margin-top:10px;background:var(--ac);color:#fff;padding:5px 14px;font:italic 700 17px "Barlow Condensed",sans-serif;text-transform:uppercase;transform:skewX(-12deg)}
+.ban .cnt b{font-size:24px}
+</style></head><body>
+<div id="app"></div><nav id="nav"></nav>
+<script>
+const S="2026-10-01",E="2027-01-31",$=s=>document.querySelector(s);
+const D=s=>{const[a,b,c]=s.split("-");return new Date(+a,b-1,+c)};
+const iso=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const add=(s,n)=>{const d=D(s);d.setDate(d.getDate()+n);return iso(d)};
+const br=s=>{const[a,b,c]=s.split("-");return c+"/"+b+"/"+a};
+const DW=["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"],dow=s=>D(s).getDay();
+const diff=(a,b)=>Math.round((D(b)-D(a))/864e5),today=iso(new Date());
+const clamp=s=>s<S?S:s>E?E:s;
+let st={logs:{},flags:[],self:{}};
+try{const x=JSON.parse(localStorage.getItem("lut"));if(x)st={...st,...x}}catch(e){}
+const save=()=>{try{localStorage.setItem("lut",JSON.stringify(st))}catch(e){}};
+const PH=[
+{n:"FASE 1 — CONSTRUIR A BASE",s:"2026-10-01",m:"Postura, guarda, deslocamento, distância, jab, direto, low kick, teep e defesa básica. Técnica > volume > intensidade.",f:["Postura, guarda e base","Jab, direto e distância","Low kick e teep","Defesa básica e equilíbrio","Integração da base"],pr:["Guarda e base sólidas","Jab, direto, low kick e teep limpos","Defesa básica automática","Base de força e aeróbica","Controlar a intensidade"],ph:"Base de força e aeróbica"},
+{n:"FASE 2 — TRANSFORMAR TÉCNICA EM LUTA",s:"2026-11-01",m:"Mais intensidade, velocidade, combinações, contra-ataques, rounds, clinch e condicionamento específico. Ataque → defesa → contra-ataque → saída.",f:["Combinações e velocidade","Ataque → defesa","Contra-ataque","Clinch e joelhadas","Rounds e ritmo"],pr:["Combinações rápidas","Ataque → defesa → contra-ataque","Clinch e joelhadas","Condicionamento específico","Tomada de decisão"],ph:"Condicionamento específico"},
+{n:"FASE 3 — ESPECIFICIDADE DE COMBATE",s:"2026-12-01",m:"Rounds simulando situações: pressão, recuo, adversário mais alto ou rápido, cansado, curta e longa distância, saída do canto.",f:["Adversário pressionando","Adversário recuando e canto","Mais alto e mais rápido","Lutar cansado","Curta e longa distância"],pr:["Combinações principais","Defesas principais","Contra-ataques principais","Estratégia e ritmo","Controle de distância"],ph:"Resistência de luta"},
+{n:"FASE 4 — PREPARAÇÃO PARA COMPETIÇÃO",s:"2027-01-01",m:"Transformar o construído em performance: pontos fortes, correção dos maiores erros, estratégia, ritmo e rounds simulados. Sem corte de peso extremo.",f:["Combinações principais","Defesas e contra-ataques principais","Estratégia e ritmo","Rounds simulados","Ajustes finais"],pr:["Definir com o treinador"],ph:"Especificidade e frescor"}];
+const ph=s=>s<PH[1].s?0:s<PH[2].s?1:s<PH[3].s?2:3;
+const wk=s=>Math.floor(diff(S,s)/7)+1;
+const foc=s=>{const p=ph(s);return PH[p].f[Math.min(Math.floor(diff(PH[p].s,s)/7),4)]};
+const EX={
+corda:["Pular corda","Salto leve e contínuo com corda.","Pés juntos na ponta dos pés, cotovelos colados ao corpo, os punhos giram a corda.","Ritmo, panturrilha e coordenação: base do trabalho de pernas no ringue.","Saltar alto demais; girar a corda com os braços inteiros.","Panturrilha aquecida, respiração subindo sem ofegar.","Sem corda: saltitos e polichinelos."],
+mobd:["Mobilidade dinâmica","Movimentos amplos e controlados.","Círculos de quadril, agachamento profundo com pausa, rotação torácica, círculos de ombro, balanço de perna.","Prepara quadril, tornozelo e ombro para chutar, esquivar e girar.","Ir rápido demais; forçar amplitude.","Articulações soltas, mais amplitude, sem dor.","—"],
+sombra:["Sombra com objetivo","Luta contra adversário imaginário com tema definido.","Guarda alta, queixo protegido. Trabalhe só o tema do dia. Rounds de 3 min.","Automatiza técnica, distância e movimentação sem equipamento.","Socar sem mexer os pés; ignorar a defesa; usar como cardio.","Respiração controlada e técnica limpa até o último round.","Pouco espaço: mesmo padrão em área menor, foco nos giros."],
+salto:["Salto horizontal","Salto para frente com aterrissagem estável.","Agache leve, balance os braços, salte o mais longe possível, caia em silêncio e segure 2 s. Volte andando.","Potência de perna para entrar e sair da distância e para o chute.","Joelho para dentro na aterrissagem; fazer cansado.","Perna explosiva, aterrissagem firme e silenciosa.","Sem espaço: salto vertical ou box jump baixo."],
+medball:["Arremesso rotacional","Lançar a bola na parede girando quadril e tronco.","De lado para a parede, pés firmes: gire quadril, tronco, depois braços; lance forte e recolha. Troque de lado.","Transfere força do chão ao cruzado, ao chute e à joelhada.","Girar só os braços; bola pesada demais.","Quadril iniciando o movimento, sem fadiga entre repetições.","Sem medicine ball: elástico ou cabo com rotação rápida."],
+agach:["Agachamento (ou trap bar)","Agachamento com barra; trap bar como opção.","Pés na largura dos ombros, tronco firme, desça até o quadril passar a linha dos joelhos, suba empurrando o chão.","Força de pernas para chutes, deslocamento e clinch.","Joelhos para dentro; perder a coluna neutra; RPE alto demais.","Coxas e glúteos trabalhando, lombar estável.","Sem barra: goblet com halter ou leg press."],
+remada:["Remada unilateral","Puxada horizontal com halter.","Apoie uma mão, costas neutras, puxe o cotovelo ao quadril, desça controlando.","Costas fortes sustentam a guarda, o clinch e protegem o ombro.","Girar o tronco; puxar só com o braço.","Costas do lado que puxa; ombro sem dor.","Remada com barra ou elástico."],
+supino:["Supino (ou flexão)","Empurrada horizontal.","Escápulas fixas, desça a barra ao peito controlada, suba firme.","Força de empurrada para jab, direto e clinch.","Ombros à frente; rebote no peito.","Peitoral e tríceps; ombro estável.","Sem barra: flexões ou halteres."],
+aerob:["Aeróbico leve","Corrida ou bike em ritmo de conversa.","Mantenha um ritmo em que consiga falar frases inteiras.","Base aeróbica para recuperar entre rounds e entre treinos.","Ir forte demais.","Respiração calma, sem esgotar.","Corrida, bike ou o que houver."],
+intv:["Intervalos curtos","Tiros fortes com pausa ativa.","Tiro de 30 s em alta intensidade (corda, bike, corrida ou sombra forte), depois pausa ativa leve.","Repetir explosões, como trocação seguida de recuperação.","Começar forte demais e cair na metade.","Esforço alto, mas repetível até a última série.","Bike, corrida, corda ou sombra forte."],
+espec:["Condicionamento específico","Rounds com golpes, movimento, clinch e explosão.","Round de 3 min: combinações, deslocamento, uma explosão de 10 s, joelhada/clinch, recuperação ativa, nova explosão.","Aproxima o físico da demanda real de uma luta.","Perder a técnica quando cansa.","Esforço de luta com técnica preservada.","Sombra + saco/aparador quando houver."],
+pallof:["Pallof press","Empurrar elástico ou cabo à frente sem girar.","De lado ao cabo, mãos no peito, estenda os braços resistindo à rotação, volte devagar.","Anti-rotação: transfere força e dá estabilidade ao golpear.","Deixar o tronco girar; ombros elevados.","Abdômen lateral firme.","Sem cabo ou elástico: prancha lateral."],
+prancha:["Prancha","Sustentar o corpo alinhado.","Antebraços no chão, glúteos e abdômen contraídos, quadril alinhado, respire.","Anti-extensão: protege a lombar e absorve golpes.","Quadril caído; prender a respiração.","Abdômen firme, sem dor lombar.","Prancha com joelhos apoiados."],
+pescoco:["Pescoço isométrico","Empurrar a cabeça contra a mão sem mover.","Sentado, mão na testa, lado ou nuca; empurre com ~50% da força por 10 s. Sem rotação com carga.","Pescoço forte reduz o impacto dos golpes.","Força máxima; empurrar com dor.","Tensão leve e uniforme no pescoço.","Dor ou formigamento: pare e procure avaliação profissional."],
+mob:["Mobilidade","Alongamentos ativos de tornozelo, quadril, adutores, posterior, torácica e ombro.","Tornozelo na parede, 90/90 de quadril, borboleta, posterior de coxa, rotação torácica, ombro na parede: 30–45 s cada.","Amplitude para chutar sem perder base e recuperar entre treinos.","Forçar até doer.","Alongamento leve a moderado, sem dor.","—"],
+swing:["Kettlebell swing","Balanço explosivo com kettlebell.","Quadril para trás, kettlebell entre as pernas, estenda o quadril com força; os braços só guiam.","Potência de quadril para chutes e deslocamento.","Agachar em vez de dobrar o quadril; puxar com os braços.","Glúteos e posterior; lombar neutra.","Sem kettlebell: halter ou salto agachado."],
+split:["Split squat / afundo","Agachamento unilateral.","Passo à frente, tronco reto, desça o joelho de trás controlado, suba com a perna da frente.","Equilíbrio e força unilateral, como nos chutes e no apoio.","Joelho para dentro; passo curto demais.","Coxa e glúteo da perna da frente.","Sem halteres: só o peso do corpo."],
+rdl:["Levantamento romeno (RDL)","Movimento de quadril com barra ou halteres.","Quadril para trás, joelhos levemente flexionados, barra perto das pernas; sinta o posterior alongar e volte.","Posterior e glúteos: aceleração, chutes e proteção do joelho.","Arredondar as costas; barra longe do corpo.","Posterior de coxa alongando, lombar neutra.","Trap bar ou halteres."],
+barra:["Barra fixa (ou puxada)","Puxada vertical.","Pegada firme, ombros para baixo, suba o queixo acima da barra, desça controlado.","Tração e pegada para clinch e ombros saudáveis.","Balançar; descer sem controle.","Costas e bíceps trabalhando.","Puxada na polia ou barra com elástico."],
+desenv:["Desenvolvimento","Empurrada vertical com halteres ou barra.","Em pé, glúteos e abdômen contraídos, empurre acima da cabeça sem arquear a lombar.","Ombros fortes mantêm a guarda alta por mais rounds.","Arquear as costas; carga que trava o ombro.","Ombros e tríceps, abdômen firme.","Desenvolvimento sentado ou flexão em pike."],
+carry:["Carry (caminhada com carga)","Andar segurando peso.","Halteres ou kettlebells pesados, postura alta, ombros para baixo, passos curtos por 30 m.","Pegada, postura e estabilidade para o clinch.","Inclinar o tronco; ombros elevados.","Pegada e core firmes.","Halteres, anilhas ou mochila."],
+roundsim:["Rounds simulados","Rounds de luta com objetivo e intensidade definidos.","Com parceiro, aparador ou sombra: 3 min por round, intensidade combinada, uma situação de luta por round.","Treina decisão, ritmo e defesa sob pressão.","Ir forte demais; ignorar a defesa.","Concentração e técnica sob cansaço.","Sem parceiro: sombra com adversário imaginário e situação definida."],
+cam:["Caminhada leve","Caminhada em ritmo confortável.","20 min ao ar livre, sem pressa.","Melhora a circulação e a recuperação.","Transformar em treino.","Corpo mais solto.","—"],
+jab:["Jab","Soco reto do braço da frente.","Guarda alta, pé da frente avança, braço estende rápido e volta à guarda pelo mesmo caminho.","Mede a distância e abre a luta; base das combinações.","Baixar a mão de trás; abrir o cotovelo.","Rápido, sem tensão, guarda intacta.","—"],
+direto:["Direto","Soco reto do braço de trás.","Gire pé e quadril de trás, ombro acompanha, soco reto ao alvo, retorne à guarda.","Principal soco de potência em linha reta.","Perder o equilíbrio; socar sem girar o quadril.","Força vinda do pé, do quadril e do tronco.","—"],
+cruz:["Cruzado e uppercut","Socos curvos e ascendentes.","Cruzado: gire o quadril, cotovelo na altura do punho. Uppercut: flexione as pernas e suba.","Trocação em curta distância.","Abrir demais o braço; perder a guarda.","Quadril girando, queixo protegido.","—"],
+low:["Low kick","Chute baixo na coxa.","Pise fora, gire o quadril, bata com a canela na coxa e volte à base.","Desgasta a perna do adversário e controla a distância.","Sem giro do quadril; baixar a guarda.","Giro completo do quadril e base recuperada.","—"],
+teep:["Teep (chute frontal)","Empurrão com a planta do pé.","Eleve o joelho, estenda o quadril, empurre o alvo, recolha e volte à base.","Controla a distância e freia o avanço do adversário.","Inclinar demais para trás; não recolher a perna.","Quadril empurrando, equilíbrio mantido.","—"],
+mid:["Middle e high kick","Chutes giratórios ao tronco e à cabeça.","Gire o pé de apoio e o quadril, chute com a canela e volte à base. High kick só com mobilidade adequada, progressivamente.","Alcance e potência; o high kick entra aos poucos.","Chutar só com a perna; pé de apoio fixo.","Giro completo e base segura ao voltar.","—"],
+joelho:["Joelhadas","Joelhada reta, curta e no clinch.","Puxe o alvo, leve o quadril à frente, joelho sobe em linha, pé de apoio na ponta.","Golpe de curta distância e de clinch.","Quadril para trás; braços soltos.","Quadril à frente, tronco estável.","—"],
+cotovelo:["Cotovelos","Golpes curtos com o cotovelo.","Trabalhe só de forma técnica e controlada na aula ou na sombra, respeitando as regras.","Curta distância e cortes.","Girar aberto; treinar sem controle.","Golpe curto sem perder a guarda.","—"],
+clinch:["Clinch","Controle do adversário por pescoço e braços.","Postura alta, cotovelos fechados, mãos atrás do pescoço, base ampla, mova o quadril.","Controla, gasta energia do adversário e abre joelhadas.","Baixar a cabeça; braços moles.","Postura estável, controle sem tensão exagerada.","Trabalho com parceiro na aula."],
+defesa:["Defesa","Bloqueio, parry, esquiva, check e saída lateral.","Guarda alta, cotovelos fechados. Bloqueie o middle, dê check no low kick, parry no jab e saia lateralmente depois de defender.","Prioridade do projeto: defender e contra-atacar.","Defender sem sair da linha; guarda aberta.","Impacto absorvido pela guarda e retorno rápido.","—"]};
+const GR={"Força":["agach","split","rdl","remada","barra","supino","desenv","carry"],"Potência":["salto","medball","swing"],"Condicionamento":["aerob","intv","espec","roundsim"],"Core e pescoço":["pallof","prancha","pescoco"],"Mobilidade":["mob","mobd","cam"]};
+const TG={"Boxe":["jab","direto","cruz"],"Chutes":["low","teep","mid"],"Joelhos e cotovelos":["joelho","cotovelo"],"Clinch":["clinch"],"Defesa":["defesa"]};
+const TH=["Movimentação","Jab e distância","Defesa","Contra-ataque","Combinações","Simulação de luta"];
+// ---- adaptação
+const av=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:null;
+const f1=x=>x==null?"—":String(Math.round(x*10)/10).replace(".",",");
+const logsIn=(a,b)=>Object.keys(st.logs).filter(k=>k>=a&&k<=b).sort().map(k=>({d:k,...st.logs[k]}));
+const nv=(a,k)=>a.filter(x=>x[k]!==""&&x[k]!=null&&!isNaN(+x[k])).map(x=>+x[k]);
+const isDone=s=>st.logs[s]&&st.logs[s].done==="SIM";
+const auto=()=>{const a=logsIn("2000-01-01",today).slice(-3);if(a.length<2)return false;const e=av(nv(a,"en")),r=av(nv(a,"rpe"));return(e!=null&&e<=4)||(r!=null&&r>=9)||a.some(x=>+x.dm>=7||+x.da>=6)};
+const fl=s=>st.flags.some(f=>f.k!=="bem"&&diff(f.d,s)>=0&&diff(f.d,s)<=2);
+const why=s=>wk(s)%4==0?"Semana de descarga (a cada 4 semanas): volume cerca de 30% menor.":fl(s)?"Você sinalizou cansaço, dor ou sparring pesado: volume reduzido por 2 dias.":(s>=today&&auto())?"Seus últimos registros indicam fadiga ou dor: volume reduzido.":"";
+// ---- gerador do treino de cada dia
+function W(s){
+ const d=dow(s),p=ph(s),r=!!why(s),w=wk(s),th=TH[(w+d)%6],q=n=>r?Math.max(2,n-1):n;
+ const R=q([3,4,5,5][p]),rp=r?"5–6":["6–7","7","7–8","8"][p],rep=["6–8","5–6","5","4–5"][p];
+ if(d==1||d==3)return{cls:1,title:"MUAY THAI COM PROFESSOR — TREINO FIXO",dur:"conforme a aula",int:"conforme a aula",obj:"Executar a aula do professor com atenção ao foco da semana: "+foc(s)+".",bl:[],r:0};
+ const aq={t:"AQUECIMENTO",tm:"8 min",o:"Elevar a temperatura e preparar quadril, tornozelo e ombro.",it:[["corda","3 × 2 min","30 s"],["mobd","1 × 5 min","—"]]};
+ const mob={t:"BLOCO FINAL — MOBILIDADE",tm:"8 min",o:"Recuperar amplitude de tornozelo, quadril e coluna torácica.",it:[["mob","1 × 8 min","—"]]};
+ const sh=(k,t)=>({t:"BLOCO 1 — TÉCNICA",tm:k*4+" min",o:"Tema: "+t+". Qualidade antes de velocidade.",it:[["sombra",k+" × 3 min · "+t,"1 min"]]});
+ const core={t:"BLOCO 4 — CORE / PESCOÇO / PREVENÇÃO",tm:"10 min",o:"Transferir força do chão ao golpe e proteger o pescoço.",it:[["pallof",q(3)+" × 10 /lado","45 s"],["prancha",q(3)+" × 30–40 s","45 s"],["pescoco",q(2)+" × 10 s por direção, leve","45 s"]]};
+ const b3=(o,it)=>({t:"BLOCO 3 — CONDICIONAMENTO",tm:"15 min",o,it});
+ const cI=["8 × 30 s forte / 60 s leve","10 × 30 s forte / 45 s leve","12 × 30 s forte / 30 s leve"][p]||"";
+ let o;
+ if(d==2)o={title:"Força + potência + técnica",dur:"75 min",int:"Moderada",obj:"Construir força de base e potência com qualidade, mais sombra de "+th.toLowerCase()+".",bl:[aq,sh(R,th),{t:"BLOCO 2 — POTÊNCIA + FORÇA",tm:"35 min",o:"Produzir força rápido e sustentar pernas, costas e empurrada. Potência primeiro, sem fadiga.",it:[["salto",q(4)+" × 3","90 s"],["medball",q(4)+" × 5 /lado","90 s"],["agach",q(4)+" × "+rep+" · RPE "+rp,"2–3 min"],["remada",q(3)+" × 8 /lado · RPE "+rp,"90 s"],["supino",q(3)+" × "+rep+" · RPE "+rp,"2 min"]]},b3("Base aeróbica sem cansar a perna para a aula.",[["aerob","15 min ritmo de conversa","—"]]),core,mob]};
+ if(d==4)o={title:"Condicionamento + técnica + core/pescoço",dur:"70 min",int:"Alta",obj:"Repetir explosões e recuperar rápido; sombra de "+th.toLowerCase()+".",bl:[aq,sh(R,th),{t:"BLOCO 2 — POTÊNCIA LEVE",tm:"10 min",o:"Manter a explosão sem gerar fadiga.",it:[["salto",q(3)+" × 3","90 s"],["medball",q(3)+" × 5 /lado","90 s"]]},p<3?b3("Desenvolver o sistema anaeróbico com explosões curtas.",[["intv",r?"6 × 30 s forte / 60 s leve":cI,"3 min a cada 4 tiros"]]):b3("Rounds que imitam a luta: golpes, clinch, explosão.",[["espec",q(4)+" × 3 min ritmo de luta","1 min"]]),core,mob]};
+ if(d==5)o={title:"Força + potência + técnica",dur:"75 min",int:"Moderada–alta",obj:"Força unilateral, posterior e tração; potência de quadril.",bl:[aq,sh(Math.max(2,R-1),"Combinações"),{t:"BLOCO 2 — POTÊNCIA + FORÇA",tm:"35 min",o:"Potência de quadril e força unilateral para chutar e se deslocar.",it:[["swing",q(4)+" × 10","90 s"],["split",q(3)+" × 8 /perna · RPE "+rp,"90 s"],["rdl",q(3)+" × "+rep+" · RPE "+rp,"2 min"],["barra",q(3)+" × 5–8","2 min"],["desenv",q(3)+" × 6–8 · RPE "+rp,"90 s"],["carry",q(3)+" × 30 m","60 s"]]},b3("Ritmo de round sem esgotar.",[["espec",q(3)+" × 2 min ritmo de round","1 min"]]),core,mob]};
+ if(d==6){const RS=["3 × 3 min controlados (50–60%)","4 × 3 min (~70%)","5 × 3 min por situação (6 se recuperado)","5–6 × 3 min estratégicos"][p];
+ o={title:"Treino específico de lutador",dur:"80 min",int:r?"Moderada":"Alta",obj:["Aplicar a técnica em rounds controlados.","Combinar ataque → defesa → contra-ataque em rounds.","Simular pressão, recuo, canto e cansaço.","Executar estratégia e ritmo de luta."][p],bl:[aq,sh(Math.min(R,3),"Simulação de luta"),{t:"BLOCO 2 — ROUNDS SIMULADOS",tm:"25 min",o:"Treinar decisão e defesa sob pressão. Foco: "+foc(s)+".",it:[["roundsim",r?"Um round a menos que o planejado: "+RS:RS,"1 min"]]},b3("Golpes → movimentação → explosão → clinch → recuperação.",[["espec",q(3)+" × 2 min","1 min"]]),core,mob]}}
+ if(d==0)o={title:"Recuperação + mobilidade + análise",dur:"40 min",int:"Muito leve",obj:"Recuperar e entender a semana: abra Evolução e veja o relatório.",bl:[{t:"RECUPERAÇÃO",tm:"20 min",o:"Circulação sem carga.",it:[["cam","20 min leve","—"]]},{...mob,tm:"15 min"},{t:"ANÁLISE DA SEMANA",tm:"5 min",o:"Registre como se sentiu e leia o relatório da semana.",it:[]}]};
+ o.cls=0;o.r=r;return o}
+// ---- UI
+let v="hoje",sel=clamp(today),cm="sem",cmo=sel.slice(0,7),ref=sel,run=false,msg="",cur=[];
+const K={hoje:["🏠","Hoje"],cal:["📅","Calendário"],evo:["📈","Evolução"],tec:["🥊","Técnica"],fis:["💪","Físico"],reg:["📝","Registros"],obj:["🎯","Objetivos"]};
+const bar=x=>`<div class="br"><i style="width:${Math.round(Math.min(1,Math.max(0,x))*100)}%"></i></div>`;
+const nav=k=>{v=k;run=false;msg="";R();scrollTo(0,0)};
+const go=s=>{sel=s;v="hoje";run=false;R();scrollTo(0,0)};
+function block(b){return`<details class="bl" ${run?"open":""}><summary><b>${b.t}</b><span>${b.tm}</span></summary><p class="mu">${b.o}</p>${b.it.map(i=>{cur.push(i);return`<div class="it">${run?'<input type="checkbox">':""}<div><b>${EX[i[0]][0]}</b><small>${i[1]}${i[2]!=="—"?" · descanso "+i[2]:""}</small></div><button class="ic" aria-label="Saiba mais" onclick="info(${cur.length-1})">ℹ️</button></div>`}).join("")}</details>`}
+function info(k,id){const i=k>=0?cur[k]:[id,"na sombra: 3 min por round","1 min entre rounds"],e=EX[i[0]],m=document.createElement("div");m.className="md";m.onclick=ev=>{if(ev.target===m)m.remove()};
+m.innerHTML=`<div><button style="float:right" onclick="this.closest('.md').remove()">Fechar</button><h3>${e[0]}</h3><h4>O que é</h4><p>${e[1]}</p><h4>Como executar</h4><p>${e[2]}</p><h4>Para que serve no Muay Thai</h4><p>${e[3]}</p><h4>Séries / repetições</h4><p>${i[1]}</p><h4>Descanso</h4><p>${i[2]}</p><h4>Erros comuns</h4><p>${e[4]}</p><h4>O que devo sentir</h4><p>${e[5]}</p><h4>Quando diminuir a intensidade</h4><p>Se a técnica quebrar, o RPE passar do planejado ou aparecer dor: tire uma série, reduza a carga e mantenha a qualidade. Dor aguda: pare.</p>${e[6]!=="—"?`<h4>Sem o equipamento</h4><p>${e[6]}</p>`:""}</div>`;document.body.appendChild(m)}
+const mv=n=>{sel=clamp(add(sel,n));run=false;R()};
+function vHoje(){
+ const w=W(sel),p=ph(sel),wn=wk(sel),L=st.logs[sel];
+ let h=`<div class="ban"><svg class="oct" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="30,3 70,3 97,30 97,70 70,97 30,97 3,70 3,30"/><polygon points="34,16 66,16 84,34 84,66 66,84 34,84 16,66 16,34"/></svg><h1>Projeto<br>Lutador</h1><p style="color:var(--tx);margin:8px 0 0">${DW[dow(sel)]}, ${br(sel)}</p><span class="cnt"><b>${Math.max(0,diff(clamp(today),E))}</b> dias até 31/01/2027</span></div>`;
+ if(today<S)h+=`<div class="al">O projeto começa em ${diff(today,S)} dia(s). Esta é a prévia do primeiro dia.</div>`;
+ if(today>E)h+=`<div class="al">Projeto encerrado. Veja o marco final em Objetivos.</div>`;
+ h+=`<div class="g2"><div class="cd"><small>Fase atual</small><b>${PH[p].n}</b></div><div class="cd"><small>Semana</small><b>${wn}/18</b>${bar(wn/18)}</div></div><div class="cd"><small>Objetivo do mês</small><p>${PH[p].m}</p><small>Objetivo da semana</small><p><b>${foc(sel)}</b></p></div>`;
+ h+=`<div class="ch"><button onclick="mv(-1)">‹ Dia</button><button onclick="go(clamp(today))">Hoje</button><button onclick="cm='sem';nav('cal')">Semana</button><button onclick="cm='mes';nav('cal')">Mês</button><button onclick="cm='proj';nav('cal')">Projeto</button><button onclick="mv(1)">Dia ›</button></div>`;
+ const y=add(today,-1);
+ if(sel===today&&y>=S&&y<=E&&!W(y).cls&&!isDone(y))h+=`<div class="al">Treino de ontem não registrado. Não compense hoje: ele é ignorado ou reduzido conforme a semana, sem criar dois treinos pesados seguidos.</div>`;
+ if(w.cls){h+=`<div class="cd hero"><h2 style="margin-top:0">MUAY THAI COM PROFESSOR</h2><p><b>Hoje é dia de aula com o professor. Siga o treino planejado pelo professor.</b></p><p class="mu">Hoje não há treino complementar.</p><p><small>Objetivo do dia</small><br>${w.obj}</p></div>`;
+  if(run)h+=`<div class="al">Aula em andamento. Ao terminar, registre duração, rounds, RPE, sparring, energia e dores.</div>`}
+ else{if(w.r)h+=`<div class="al">${why(sel)}</div>`;
+  h+=`<div class="cd hero"><h2 style="margin-top:0">${w.title}</h2><span class="bd">⏱ ${w.dur}</span><span class="bd">🔥 ${w.r?"Reduzida":w.int}</span><p><small>Objetivo do dia</small><br>${w.obj}</p></div>`+w.bl.map(block).join("")}
+ h+=`<button class="big pri" onclick="run=!run;R()">${run?"⏸ PAUSAR MODO TREINO":"🔥 INICIAR TREINO"}</button>`;
+ if(!w.cls)h+=`<button class="big" onclick="document.querySelectorAll('details').forEach(x=>x.open=true)">ℹ️ SAIBA MAIS</button>`;
+ h+=`<button class="big" onclick="v='reg';R()">${L?"✅ Registrado · editar registro":"📝 REGISTRAR TREINO"}</button>`;
+ if(sel===today)h+=`<h2>Como você está?</h2><div class="ch" style="flex-wrap:wrap">${[["cansado","Muito cansado"],["dor","Com dor"],["sparring","Sparring pesado"],["incompleto","Não completei"],["bem","Evoluindo bem"]].map(x=>`<button onclick="flag('${x[0]}')">${x[1]}</button>`).join("")}</div>`;
+ return h+`<p class="mu" style="margin-top:18px"><small>Segurança: não treine com dor aguda. Sintomas de concussão, dor no peito ou falta de ar anormal: pare e procure avaliação médica. Este app auxilia e não substitui seu treinador.</small></p>`}
+function flag(k){st.flags.push({d:today,k});save();msg={cansado:"Volume reduzido nos próximos 2 dias. Segunda e quarta continuam com o professor.",dor:"Volume reduzido. Se a dor for aguda ou não passar, procure avaliação profissional.",sparring:"Sparring pesado registrado: carga complementar reduzida por 2 dias.",incompleto:"Registrado. O treino não é acumulado: reduzimos os próximos dias.",bem:"Ótimo. Mantemos a progressão planejada, sem aumentos automáticos."}[k];R()}
+function row(s){const w=W(s);return`<div class="rw ${s===today?"td":""}" onclick="go('${s}')"><div class="dt"><b>${s.slice(8)}</b><small>${DW[dow(s)].slice(0,3)}</small></div><div><b>${w.cls?"Muay Thai com professor — treino fixo":w.title}</b><small>Sem ${wk(s)} · Fase ${ph(s)+1} · ${w.dur} · ${w.int}</small><small class="cl">${w.obj}</small></div><span>${isDone(s)?"✅":""}</span></div>`}
+function vCal(){
+ let h=`<h2>Calendário</h2><div class="ch">${[["sem","Semana"],["mes","Mês"],["proj","Projeto"]].map(x=>`<button class="${cm==x[0]?"on":""}" onclick="cm='${x[0]}';R()">${x[1]}</button>`).join("")}</div>`;
+ if(cm=="sem"){const m=add(sel,-((dow(sel)+6)%7));h+=`<div class="ch"><button onclick="mv(-7)">‹</button><b>${br(m)} a ${br(add(m,6))}</b><button onclick="mv(7)">›</button></div>`;for(let i=0;i<7;i++){const s=add(m,i);if(s>=S&&s<=E)h+=row(s)}}
+ if(cm=="mes"){h+=`<div class="ch">${[["2026-10","Out"],["2026-11","Nov"],["2026-12","Dez"],["2027-01","Jan"]].map(x=>`<button class="${cmo==x[0]?"on":""}" onclick="cmo='${x[0]}';R()">${x[1]}</button>`).join("")}</div>`;for(let s=S;s<=E;s=add(s,1))if(s.slice(0,7)==cmo)h+=row(s)}
+ if(cm=="proj"){let n=0,tot=diff(S,E)+1;for(let s=S;s<=E;s=add(s,1))if(W(s).title)n++;
+  h+=`<div class="cd"><b>Projeto completo</b><p>${br(S)} a ${br(E)} · 18 semanas</p>${bar(Math.max(0,Math.min(1,(diff(S,today)+1)/tot)))}<p class="mu">Verificação: ${n}/${tot} dias com treino planejado ${n==tot?"✅":"⚠️"}</p></div>`;
+  PH.forEach((f,i)=>{const a=f.s,b=i<3?add(PH[i+1].s,-1):E,pg=(diff(a,clamp(today>b?b:today<a?a:today))+(today>=a?1:0))/(diff(a,b)+1);h+=`<div class="cd"><h3>${f.n}</h3><small>${br(a)} a ${br(b)}</small><p>${f.m}</p>${bar(pg)}<button style="margin-top:8px" onclick="cm='mes';cmo='${a.slice(0,7)}';R()">Ver dias</button></div>`})}
+ return h}
+function spark(a){if(!a.length)return"";const mn=Math.min(...a),mx=Math.max(...a);return`<div class="sp">${a.slice(-12).map(x=>`<i style="height:${Math.round(20+80*(x-mn)/(mx-mn||1))}%"></i>`).join("")}</div>`}
+const DI="<p class='mu'>Dados insuficientes.</p>";
+function ind(t,a,fmt){return`<div class="cd"><small>${t}</small>${a.length<3?DI:`<div class="big2">${fmt(a)}</div>${spark(a)}`}</div>`}
+function repW(){const m=add(ref,-((dow(ref)+6)%7)),e=add(m,6),a=logsIn(m,e);let pl=0;for(let s=m;s<=e;s=add(s,1))if(s>=S&&s<=E)pl++;const dn=a.filter(x=>x.done==="SIM").length,dif=a.filter(x=>x.dif).map(x=>x.dif).join("; ");
+ return`<div class="cd"><h3>Relatório da semana</h3><small>${br(m)} a ${br(e)}</small><table><tr><td>Treinos planejados</td><td>${pl}</td></tr><tr><td>Treinos concluídos</td><td>${dn}</td></tr><tr><td>Adesão</td><td>${pl?Math.round(dn/pl*100)+"%":"—"}</td></tr><tr><td>RPE médio</td><td>${f1(av(nv(a,"rpe")))}</td></tr><tr><td>Energia média</td><td>${f1(av(nv(a,"en")))}</td></tr><tr><td>Sono médio</td><td>${f1(av(nv(a,"sn")))}</td></tr></table><p><small>Principais dificuldades</small><br>${dif||"Nenhuma registrada."}</p><p><small>Ponto técnico a corrigir</small><br>${foc(clamp(ref))}</p><p><small>Ponto físico a desenvolver</small><br>${PH[ph(clamp(ref))].ph}</p></div>`}
+const SELF=["Defesa","Ataque","Movimentação","Distância","Combinações","Contra-ataque","Clinch","Força","Potência","Resistência","Velocidade","Mobilidade","Concentração","Controle sob fadiga","Tomada de decisão"];
+function setSelf(k,i,x){(st.self[k]=st.self[k]||{})[i]=x;save()}
+function repM(){const mk=clamp(ref).slice(0,7),ds=[];for(let s=S;s<=E;s=add(s,1))if(s.slice(0,7)==mk)ds.push(s);const a=logsIn(mk+"-01",mk+"-31"),dn=a.filter(x=>x.done==="SIM").length,mis=ds.filter(s=>s<today&&!isDone(s)).length,pi=ph(ds[0]),nx=PH[pi+1]?PH[pi+1].pr:["Definir com o treinador"],sf=st.self[mk]||{};
+ return`<div class="cd"><h3>Relatório mensal</h3><small>${mk.split("-").reverse().join("/")} · ${PH[pi].n}</small><table><tr><td>Treinos realizados</td><td>${dn}</td></tr><tr><td>Treinos perdidos</td><td>${mis}</td></tr><tr><td>Recuperação (sono / energia)</td><td>${f1(av(nv(a,"sn")))} / ${f1(av(nv(a,"en")))}</td></tr><tr><td>Qualidade técnica média</td><td>${f1(av(nv(a,"tec")))}</td></tr><tr><td>RPE médio</td><td>${f1(av(nv(a,"rpe")))}</td></tr></table><p><small>Autoavaliação do mês (1 a 5)</small></p><div class="g2">${SELF.map((n,i)=>`<label style="margin:4px 0">${n}<select onchange="setSelf('${mk}',${i},this.value)"><option value="">—${[1,2,3,4,5].map(x=>`<option ${sf[i]==x?"selected":""}>${x}`).join("")}</select></label>`).join("")}</div><h3 style="margin-top:14px">Prioridades do próximo mês</h3>${nx.slice(0,5).map((x,i)=>`<p>${i+1}. ${x}</p>`).join("")}</div>`}
+function vEvo(){const A=logsIn(S,"2100-01-01"),up=today<S?null:(today>E?E:today),pl=up?diff(S,up)+1:0,dn=A.filter(x=>x.done==="SIM"&&x.d<=(up||S)).length,r7=A.slice(-7);
+ let h=`<h2>Evolução</h2><div class="cd"><small>Consistência</small>${pl?`<div class="big2">${Math.round(dn/pl*100)}%</div>${bar(dn/pl)}<small>${dn} de ${pl} dias concluídos</small>`:DI}</div>`;
+ h+=ind("Técnica (qualidade registrada, 1–10)",nv(A,"tec"),a=>f1(av(a.slice(-3)))+" recente");
+ h+=ind("Condicionamento (RPE médio, últimos registros)",nv(r7,"rpe"),a=>f1(av(a)));
+ h+=ind("Força (carga principal, kg)",nv(A,"carga"),a=>a[0]+" → "+a[a.length-1]+" kg");
+ h+=ind("Potência (salto horizontal, cm)",nv(A,"salto"),a=>a[0]+" → "+a[a.length-1]+" cm");
+ const sn=nv(r7,"sn"),en=nv(r7,"en"),dm=nv(r7,"dm");h+=`<div class="cd"><small>Recuperação (últimos 7 registros)</small>${sn.length<3?DI:`<table><tr><td>Sono</td><td>${f1(av(sn))}</td></tr><tr><td>Energia</td><td>${f1(av(en))}</td></tr><tr><td>Dor muscular</td><td>${f1(av(dm))}</td></tr></table>`}</div>`;
+ h+=`<h2>Relatórios</h2><label>Período de referência<input type="date" min="${S}" max="${E}" value="${clamp(ref)}" onchange="ref=this.value||ref;R()"></label>`+repW()+repM();return h}
+function vTec(){let h=`<h2>Banco de técnica</h2><p class="mu">Toque em um item para ver como executar. Outubro: jab, direto, low kick, teep e defesa. Novembro: combinações e clinch. Dezembro: situações de luta. Janeiro: executar.</p>`;
+ for(const g in TG)h+=`<h3 style="margin-top:14px">${g}</h3>`+TG[g].map(id=>`<div class="rw" onclick="info(-1,'${id}')"><div><b>${EX[id][0]}</b><small>${EX[id][1]}</small></div></div>`).join("");return h}
+function vFis(){let h=`<h2>Físico</h2><p class="mu">Cada exercício tem uma razão: toque para ver para que serve e a alternativa sem equipamento.</p>`;
+ for(const g in GR)h+=`<h3 style="margin-top:14px">${g}</h3>`+GR[g].map(id=>`<div class="rw" onclick="info(-1,'${id}')"><div><b>${EX[id][0]}</b><small>${EX[id][3]}</small></div></div>`).join("");return h}
+function vReg(){
+ const d=sel,l=st.logs[d]||{},c=dow(d)==1||dow(d)==3;
+ const rg=(k,lb,mn,mx,df)=>`<label class="rg">${lb}<output>${l[k]??df}</output><input type="range" id="f_${k}" min="${mn}" max="${mx}" value="${l[k]??df}" oninput="this.previousElementSibling.value=this.value"></label>`;
+ const se=(k,lb,o)=>`<label>${lb}<select id="f_${k}">${o.map(x=>`<option ${l[k]==x?"selected":""}>${x}`).join("")}</select></label>`;
+ const nu=(k,lb)=>`<label>${lb}<input type="number" inputmode="decimal" id="f_${k}" value="${l[k]??""}"></label>`;
+ let h=`<h2>Registrar treino</h2><div class="ch"><button onclick="mv(-1)">‹</button><b>${DW[dow(d)]}, ${br(d)}</b><button onclick="mv(1)">›</button></div>`;
+ if(d>today)h+=`<div class="al">Só é possível registrar treinos de hoje ou de dias passados.</div>`;
+ else{h+=`<div class="cd" id="fm">${se("done","Treino concluído",["SIM","NÃO"])}`+(c?nu("dur","Duração (min)")+nu("rd","Rounds aproximados")+se("it","Intensidade",["Leve","Moderada","Alta"])+se("sp","Sparring realizado",["Não","Sim"])+rg("ea","Energia antes",1,10,6)+rg("ed","Energia depois",1,10,6):rg("en","Energia",1,10,6))+rg("rpe","RPE",1,10,6)+rg("dm","Dor muscular",0,10,0)+rg("da","Dor articular",0,10,0)+rg("sn","Sono",1,10,7)+rg("hu","Humor / disposição",1,10,7)+rg("tec","Qualidade técnica",1,10,6)+(c?"":nu("carga","Carga do exercício principal (kg, opcional)")+nu("salto","Salto horizontal (cm, opcional)"))+`<label>Dores (onde?)<input type="text" id="f_dor" value="${l.dor??""}"></label><label>Dificuldades encontradas<input type="text" id="f_dif" value="${l.dif??""}"></label><label>Observação<textarea id="f_obs" rows="3">${l.obs??""}</textarea></label><button class="big pri" onclick="sv()">Salvar registro</button></div><p class="mu"><small>Após sparring: tontura, confusão, dor de cabeça forte ou náusea podem indicar concussão. Pare e procure avaliação médica.</small></p>`}
+ h+=`<h2>Histórico</h2>`;const H=logsIn(S,"2100-01-01").reverse();
+ h+=H.length?H.map(x=>`<div class="rw" onclick="sel='${x.d}';R();scrollTo(0,0)"><div class="dt"><b>${x.d.slice(8)}</b><small>${x.d.slice(5,7)}</small></div><div><b>${x.done==="SIM"?"✅ Concluído":"❌ Não concluído"} · RPE ${x.rpe}</b><small>Energia ${x.en} · Sono ${x.sn} · Dor ${x.dm}/${x.da}${x.obs?" · "+x.obs:""}</small></div></div>`).join(""):"<p class='mu'>Nenhum registro ainda. Salve o primeiro treino acima.</p>";return h}
+function sv(){const o={};document.querySelectorAll("#fm [id^=f_]").forEach(e=>o[e.id.slice(2)]=e.value);if(o.ed!=null)o.en=o.ed;st.logs[sel]=o;save();msg="Registro salvo."+(+o.da>=8||+o.dm>=9?" Dor alta: não treine sob dor aguda; se persistir, procure avaliação profissional.":"");R()}
+function vObj(){const p=ph(sel),A=logsIn(S,E),dn=A.filter(x=>x.done==="SIM"),w=W(sel);
+ const first=(k,u)=>{const a=nv(A,k);return a.length<3?"Dados insuficientes.":a[0]+" → "+a[a.length-1]+" "+u};
+ return`<h2>Objetivos</h2>${[["Projeto","Chegar ao final de janeiro com evolução significativa e preparação para competir."],["Mês · "+PH[p].n,PH[p].m],["Semana "+wk(sel)+" · "+br(sel),foc(sel)],["Dia · "+DW[dow(sel)],w.obj],["Exercício","Cada exercício mostra para que serve no Muay Thai: toque em ℹ️ no treino do dia."]].map(x=>`<div class="cd"><small>${x[0]}</small><p>${x[1]}</p></div>`).join("")}
+ <h2>🏆 Projeto Lutador — final ${today<E?"(parcial)":""}</h2><div class="cd"><table><tr><td>Treinos concluídos</td><td>${dn.length}</td></tr><tr><td>Consistência</td><td>${today<S?"—":Math.round(dn.length/(diff(S,clamp(today))+1)*100)+"%"}</td></tr><tr><td>Qualidade técnica (início → agora)</td><td>${first("tec","")}</td></tr><tr><td>Força (kg)</td><td>${first("carga","kg")}</td></tr><tr><td>Potência (salto)</td><td>${first("salto","cm")}</td></tr><tr><td>RPE médio</td><td>${f1(av(nv(A,"rpe")))}</td></tr></table><p class="mu"><small>Pontos fortes, pontos fracos, erros corrigidos e foco da próxima fase: defina com seu treinador em 31/01/2027. Este sistema não diz que você está pronto para lutar: a decisão considera o treinador, o nível técnico, a experiência de sparring, a saúde e as regras da competição.</small></p></div>`}
+function R(){cur=[];const F={hoje:vHoje,cal:vCal,evo:vEvo,tec:vTec,fis:vFis,reg:vReg,obj:vObj};$("#app").innerHTML=(msg?`<div class="toast" onclick="msg='';R()">${msg}</div>`:"")+F[v]();$("#nav").innerHTML=Object.entries(K).map(([k,[e,l]])=>`<button class="${k==v?"on":""}" onclick="nav('${k}')"><span>${e}</span>${l}</button>`).join("")}
+R();
+</script></body></html>
